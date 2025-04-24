@@ -12,6 +12,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Run HTML validation
+      run: |
+        echo "Running basic HTML validation..."
+        if ! grep -qi '<html' index.html; then
+          echo "index.html missing <html> tag!"
+          exit 1
+        fi
+        echo "HTML validation passed ✅"
+
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
       with:
